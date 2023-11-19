@@ -100,7 +100,10 @@ class ConnectFourState(State):
         text = '\n'.join(
             reversed([''.join(f'[{" " if field is None else field.char}]' for field in row) for row in transposed])
         )
-        
+        if self.get_winner():
+            return f'Winner: {self.get_winner().char}\n{text}'
+        elif self.is_finished():
+            return f'Draw!\n{text}'
         return f'Current player: {self._current_player.char}\n{text}'
 
     # below are helper methods for the public interface
